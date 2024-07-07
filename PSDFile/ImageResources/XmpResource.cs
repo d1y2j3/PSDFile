@@ -27,7 +27,7 @@ namespace PSDFile
             catch (Exception e)
             {
                 Util.DebugMessage(br.BaseStream,
-                    $"Load, Error, XmpResource, ParseXmpMetaData");
+                    $"Load, Error, XmpResource, ParseXmpMetaData->"+e.Message);
             }
         }
 

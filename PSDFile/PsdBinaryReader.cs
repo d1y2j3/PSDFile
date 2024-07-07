@@ -173,7 +173,7 @@ namespace PSDFile
 
         public void Dispose()
         {
-            Dispose();
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 

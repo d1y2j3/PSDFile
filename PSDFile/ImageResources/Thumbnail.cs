@@ -34,37 +34,31 @@ namespace PSDFile
                     var bitPerPixel = reader.ReadUInt16();
                     var planes = reader.ReadUInt16();
 
-                    // Raw RGB bitmal
-                    if (format == 0)
+                    Bitmap bitmap = null;
+                    if (format == 0) // Raw RGB bitmap
                     {
-                        Image = new Bitmap((int)width, (int)height, PixelFormat.Format24bppRgb);
+                        // 根据读取的数据创建 Bitmap
+                        // 注意：这里需要更多的代码来处理实际的像素数据
+                        // 以下代码仅为示例
+                        bitmap = new Bitmap((int)width, (int)height, PixelFormat.Format24bppRgb);
                     }
-                    // JPEG bitmap
-                    else if (format == 1)
+                    else if (format == 1) // JPEG bitmap
                     {
-                        byte[] imgData = reader.ReadBytes(numBytes - HEADER_LENGTH);
-                        using (MemoryStream stream = new MemoryStream(imgData))
+                        var imgData = reader.ReadBytes(numBytes - HEADER_LENGTH);
+                        using (MemoryStream stream = new MemoryStream(imgData, false))
                         {
-                            var bitmap = new Bitmap(stream);
-                            Image = (Bitmap)bitmap.Clone();
+                            bitmap = new Bitmap(stream);
                         }
 
-                        // Reverse BGR pixels from old thumbnail format
-                        if (id == ResourceID.ThumbnailBgr)
-                        {
-                            //for(int y=0;y<m_thumbnailImage.Height;y++)
-                            //  for (int x = 0; x < m_thumbnailImage.Width; x++)
-                            //  {
-                            //    Color c=m_thumbnailImage.GetPixel(x,y);
-                            //    Color c2=Color.FromArgb(c.B, c.G, c.R);
-                            //    m_thumbnailImage.SetPixel(x, y, c);
-                            //  }
-                        }
+
                     }
                     else
                     {
                         throw new PsdInvalidException("Unknown thumbnail format.");
                     }
+
+                    // 将读取的 Bitmap 赋值给 Image 属性
+                    Image = bitmap; // 注意：这里不再克隆 Bitmap
                 }   
             }  
         }

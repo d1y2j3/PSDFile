@@ -5,7 +5,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 
-using static System.FormattableString;
 
 namespace PSDFile
 {
@@ -148,8 +147,10 @@ namespace PSDFile
         /// </summary>
         protected abstract void WriteData(PsdBinaryWriter writer);
 
-        public override string ToString() =>
-          Invariant($"{ID} {Name}");
+        public override string ToString()
+        {
+            return string.Format("{0} {1}", ID, Name);
+        }
     }
 
     /// <summary>
