@@ -13,6 +13,6 @@ The library can load and save the following features of Photoshop .PSD files wit
 
 
 .net 4.0  
-垃圾回收异常修复。dispose(true);
+修复缩略图垃圾回收异常修复。dispose(true);
 
 
