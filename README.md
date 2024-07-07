@@ -12,3 +12,7 @@ The library can load and save the following features of Photoshop .PSD files wit
 * (Optional) RLE compression
 
 
+.net 4.0  
+垃圾回收异常修复。dispose(true);
+
+
